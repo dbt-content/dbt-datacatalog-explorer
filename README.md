@@ -3,7 +3,7 @@
 
 A simple Web application to explore BigQuery tables and views tagged in [Google Cloud Data Catalog](https://cloud.google.com/data-catalog/) with a [dbt](https://www.getdbt.com/) tag.
 
-<img src="https://github.com/victorcouste/dataprep-datacatalog-explorer/blob/main/static/dbt_datacatalog_explorer.png" width="50%" height="50%">
+<img src="https://github.com/dbt-content/dbt-datacatalog-explorer/blob/main/static/dbt_datacatalog_explorer.png" width="50%" height="50%">
 
 This application search all BigQuery tables and views in Google Cloud Data Catalog with a dbt metadata tag. You can also filter the request with dbt Project, dbt Model, dbt Cloud Job or dbt Cloud Project.
 
