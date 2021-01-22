@@ -11,7 +11,7 @@ Learn how to update or create dbt tags on Google Cloud Data Catalog entries (Big
 
 This Web application uses <a href="https://flask.palletsprojects.com/" target="_blank">Python Flask Web framework</a> and <a href="https://googleapis.dev/python/datacatalog/latest/index.html#" target="_blank">Python Client for Google Cloud Data Catalog API</a> to search in Data Catalog.
 
-Python source code using Data Catalog API can be found in [datacatalog_functions.py](https://github.com/dbt-content/dbt-datacatalog-explorer/blob/master/datacatalog_functions.py) file.
+Python source code using Data Catalog API can be found in [datacatalog_functions.py](https://github.com/dbt-content/dbt-datacatalog-explorer/blob/main/datacatalog_functions.py) file.
 
 ## Installation
 
