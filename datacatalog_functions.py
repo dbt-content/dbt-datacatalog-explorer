@@ -1,7 +1,7 @@
 from google.cloud import datacatalog
 from datetime import datetime
 
-key_path="/Users/victorcoustenoble/Documents/Trifacta/Product/others/dbt/API/dbt-test-301310-7f3e689c052c.json"
+key_path="<path to Google service account json key file>"
 datacatalog_client = datacatalog.DataCatalogClient.from_service_account_json(key_path)
 
 def get_datacatalog_object_tags(dbt_model,dbt_project,dbt_cloud_job,dbt_cloud_project,gcp_project,dbt_tag_template):
