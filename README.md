@@ -3,7 +3,7 @@
 
 A simple Web application to explore BigQuery tables and views tagged in [Google Cloud Data Catalog](https://cloud.google.com/data-catalog/) with a [dbt](https://www.getdbt.com/) tag.
 
-<img src="https://github.com/victorcouste/dataprep-datacatalog-explorer/blob/master/static/dbt_datacatalog_explorer.png" width="50%" height="50%">
+<img src="https://github.com/victorcouste/dataprep-datacatalog-explorer/blob/main/static/dbt_datacatalog_explorer.png" width="50%" height="50%">
 
 This application search all BigQuery tables and views in Google Cloud Data Catalog with a dbt metadata tag. You can also filter the request with dbt Project, dbt Model, dbt Cloud Job or dbt Cloud Project.
 
@@ -27,9 +27,9 @@ If need more details on Flask framework installation and configuration, [see her
 
 ## Running
 
-1/ Update the **key_path** parameter in [datacatalog_functions.py](https://github.com/dbt-content/dbt-datacatalog-explorer/blob/master/datacatalog_functions.py) Python file. This parameter set your <a href="https://googleapis.dev/python/google-api-core/latest/auth.html#service-accounts" target="_blank">service account json key file to authenticating to Google Cloud services</a>.
+1/ Update the **key_path** parameter in [datacatalog_functions.py](https://github.com/dbt-content/dbt-datacatalog-explorer/blob/main/datacatalog_functions.py) Python file. This parameter set your <a href="https://googleapis.dev/python/google-api-core/latest/auth.html#service-accounts" target="_blank">service account json key file to authenticating to Google Cloud services</a>.
 
-2/ Update the 2 parameters in [dbt-datacatalog-explorer.py](https://github.com/dbt-content/dbt-datacatalog-explorer/blob/master/dbt-datacatalog-explorer.py) Python file:
+2/ Update the 2 parameters in [dbt-datacatalog-explorer.py](https://github.com/dbt-content/dbt-datacatalog-explorer/blob/main/dbt-datacatalog-explorer.py) Python file:
 
 * **gcp_project**  : The GCP project where to search your BigQuery tables
 * **dbt_metadata_tag_template** : The name (id) of the Dataprep metadata tag template
@@ -44,4 +44,4 @@ flask run --port 5000
   
 Now you must be able to go to http://127.0.0.1:5000/ and play with the application:
   
-  ![alt tag](https://github.com/dbt-content/dbt-datacatalog-explorer/blob/master/Search_BigQuery_objects_with_dbt_Metadata_Tag.png)
+  ![alt tag](https://github.com/dbt-content/dbt-datacatalog-explorer/blob/main/Search_BigQuery_objects_with_dbt_Metadata_Tag.png)
