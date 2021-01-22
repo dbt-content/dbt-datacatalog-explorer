@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Search BigQuery tables or views with dbt tag</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+</head>
+<body>
+<div class="section">
+    <div class="container">
+        <h1><b>BigQuery tables or views with a dbt tag</b></h1>
+        <br>
+        &nbsp;&nbsp;&nbsp;<img src="{{ url_for('static', filename='dbt_datacatalog_explorer.png') }}" width="20%" height="20%">
+        <br><br>
+        <p>Search BigQuery tables or views with <a href="https://www.getdbt.com/" target="_blank">dbt</a> metadata tag.
+        <br>
+        Tags are stored in <a href="https://cloud.google.com/data-catalog" target="_blank">Google Cloud Data Catalog</a>.
+        <br>
+        Search can be filtered by dbt project, model, Cloud job or Cloud project.
+
+        </p>
+        <br>
+
+        <br>
+        <form method="post" class="form-inline">
+            <table border="0">
+                <tr style="height: 30px;">
+                    <td style="padding-right: 10px"><label>dbt Project</label></td>
+                    <td><input autofocus="autofocus" style="width:500px" type="text" placeholder="dbt Project" name="dbt_project"
+                               value="{{ dbt_project }}"></td>
+                </tr>
+                <tr>
+                    <td style="padding-right: 10px"><label>dbt Model</label></td>
+                    <td><input style="width:500px" placeholder="dbt Model"
+                               name="dbt_model" value="{{ dbt_model }}"></td>
+                </tr>
+                <tr style="height: 30px;">
+                    <td style="padding-right: 10px"><label>dbt Cloud Job</label></td>
+                    <td><input autofocus="autofocus" style="width:500px" type="text" placeholder="dbt Cloud Job" name="dbt_cloud_job"
+                               value="{{ dbt_cloud_job }}"></td>
+                </tr>
+                <tr>
+                    <td style="padding-right: 10px"><label>dbt Cloud Project</label></td>
+                    <td><input style="width:500px" placeholder="dbt Cloud Project"
+                               name="dbt_cloud_project" value="{{ dbt_cloud_project }}"></td>
+                </tr>
+
+            </table>
+            <br>
+            <button type="submit">Get BigQuery tables or views and get tags associated</button>
+
+        </form>
+        <br>
+
+        {% if dbt_project != '' %}
+            Results for dbt Project with name containing <b>{{ dbt_project }}</b>
+        {% elif dbt_model != '' %}
+            Results for dbt Model with name containing <b>{{ dbt_model }}</b>
+        {% elif dbt_cloud_job != '' %}
+            Results for dbt Cloud Job name containing <b>{{ dbt_cloud_job }}</b>
+        {% elif dbt_cloud_project != '' %}
+            Results for dbt Cloud Project name containing <b>{{ dbt_cloud_project }}</b>
+        {% else %}
+            Results for all dbt Cloud Run
+        {% endif %}
+
+        <br>
+        <br>
+            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <tr>
+                        <th>BigQuery Table or View</th>
+                        <th>dbt Run</th>
+                        <th>dbt Run Date</th>
+                        <th>dbt Model</th>
+                        <th>dbt Project</th>
+                        <th>dbt Cloud Job</th>
+                        <th>dbt Cloud Project</th>                  
+                </tr>
+
+                {% for object_tag in datacatalog_objects_tags %}
+                <tr>
+                        <td><a href="{{ 'https://console.cloud.google.com/datacatalog/'+object_tag['object']['relative_resource_name']+'?project='+gcp_project+'&folder=&organizationId=' }}" target="_blank">{{ object_tag["object"]["dataset"]+'.'+object_tag["object"]["name"] }}</a></td>
+                        <td><a href="{{ object_tag['tag'].fields['dbt_run_url'].string_value }}" target="_blank">{{ object_tag["tag"].fields['dbt_run_id'].string_value }}</a></td>
+                        <td>{{ object_tag["run_date"] }}</td>
+                        <td>{{ object_tag["tag"].fields['dbt_model_name'].string_value }}</td>
+                        <td>{{ object_tag["tag"].fields['dbt_project_name'].string_value }}</td>
+                        <td><a href="{{ object_tag['tag'].fields['dbt_job_url'].string_value }}" target="_blank">{{ object_tag["tag"].fields['dbt_job_name'].string_value }}</a></td>
+                        <td><a href="{{ object_tag['tag'].fields['dbt_cloud_project_url'].string_value }}" target="_blank">{{ object_tag["tag"].fields['dbt_cloud_project_name'].string_value }}</a></td>                          
+
+                </tr>
+                {% endfor %}
+
+            </table>
+
+
+        <br>
+        <p>This application is using <a href="https://googleapis.dev/python/datacatalog/latest/index.html#" target="_blank">Python Client for Google Cloud Data Catalog API</a> to search in Data Catalog.</p>
+
+    </div>
+</div>
+</body>
+</html>
